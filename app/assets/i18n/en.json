@@ -1,0 +1,53 @@
+{
+  "common": {
+    "back": "← Back",
+    "cancel": "Cancel",
+    "confirm": "✓ Confirm",
+    "error": "❌ Error",
+    "loading": "Loading..."
+  },
+  "home": {
+    "title": "🐄 Cattle Recognizer",
+    "captureImage": "📸 Capture Image",
+    "uploadFromGallery": "📁 Upload from Gallery",
+    "browseBreeds": "�� Browse Breeds", 
+    "settings": "⚙️ Settings"
+  },
+  "result": {
+    "title": "Recognition Results",
+    "suggestions": "Breed Suggestions",
+    "loading": "Analyzing image...",
+    "inferenceError": "Failed to analyze image",
+    "noResults": "No breeds detected",
+    "confirmTitle": "Confirm Breed",
+    "confirmMessage": "Are you sure this is",
+    "saveSuccessTitle": "✅ Saved!",
+    "saveSuccessMessage": "Registration saved successfully",
+    "saveError": "Failed to save registration"
+  },
+  "breeds": {
+    "listTitle": "Cattle Breeds",
+    "detailTitle": "Breed Details",
+    "description": "Description",
+    "managementTips": "Management Tips"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "dataSync": "Data Sync",
+    "syncNow": "Sync Now",
+    "languageSettings": "🌐 Language Settings",
+    "about": "ℹ️ About App"
+  },
+  "permissions": {
+    "camera": {
+      "title": "Camera Permission Required",
+      "message": "This app needs camera access to take photos of cattle"
+    },
+    "gallery": {
+      "title": "Gallery Permission Required",
+      "message": "This app needs gallery access to upload cattle photos"
+    },
+    "grant": "Grant Permission"
+  }
+}

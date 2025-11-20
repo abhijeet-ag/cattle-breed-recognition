@@ -1,0 +1,6 @@
+0 Gir
+1 Ayrshire
+2 Brown_Swiss
+3 Holstein_Friesian
+4 Sahilwal
+5 Tharparker

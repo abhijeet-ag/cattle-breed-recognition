@@ -1,0 +1,26 @@
+[
+  {
+    "id": "gir",
+    "name": "Gir",
+    "localName": "गिर",
+    "description": "Originating from Gujarat, known for its high milk production and heat tolerance. It has a distinctive rounded and domed forehead.",
+    "imageUrl": "https://i.imgur.com/exampleGir.jpg",
+    "managementTips": "Requires regular vaccination and a balanced diet rich in minerals. Due to its docile nature, it is easy to manage in larger herds."
+  },
+  {
+    "id": "sahiwal",
+    "name": "Sahiwal",
+    "localName": "साहीवाल",
+    "description": "A popular dairy breed from Punjab, known for its docility and high-quality milk with a high butterfat content. It is reddish-dun in color.",
+    "imageUrl": "https://i.imgur.com/exampleSahiwal.jpg",
+    "managementTips": "Highly resistant to ticks and many tropical diseases. Provide ample shade and fresh water, especially in hot climates."
+  },
+  {
+    "id": "murrah",
+    "name": "Murrah",
+    "localName": "मुर्रा",
+    "description": "A world-renowned buffalo breed from Haryana, famous for its high-fat milk, often called the 'black gold' of India. It has tightly curved horns.",
+    "imageUrl": "https://i.imgur.com/exampleMurrah.jpg",
+    "managementTips": "Requires access to clean water for wallowing to regulate body temperature. A high-protein diet is essential for optimal milk production."
+  }
+]

@@ -1,0 +1,22 @@
+# System Files
+.DS_Store
+
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Build Output
+.expo/
+dist/
+web-build/
+
+# Heavy ML Models (We will ignore these to prevent GitHub errors)
+*.pth
+*.onnx
+*.h5
+*.tflite
+# Note: We keep the .bin shards for TFJS as they are usually small enough
+
+# Environment Variables
+.env

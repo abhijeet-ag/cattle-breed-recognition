@@ -1,26 +1,82 @@
 [
   {
-    "id": "gir",
+    "id": "1",
     "name": "Gir",
-    "localName": "गिर",
-    "description": "Originating from Gujarat, known for its high milk production and heat tolerance. It has a distinctive rounded and domed forehead.",
-    "imageUrl": "https://i.imgur.com/exampleGir.jpg",
-    "managementTips": "Requires regular vaccination and a balanced diet rich in minerals. Due to its docile nature, it is easy to manage in larger herds."
+    "origin": "Gujarat, India",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Gir_cow_at_SAS_Goshala.jpg/640px-Gir_cow_at_SAS_Goshala.jpg",
+    "stats": { "milk_yield": "1200-1800 kg", "weight": "400kg", "protein": "4.5%", "height": "130 cm", "coat": "Red / Speckled", "diseases": "Tick Resistant" },
+    "description": "Famous for its rounded forehead and long pendulous ears. It is one of the most popular dairy breeds in India."
   },
   {
-    "id": "sahiwal",
+    "id": "2",
     "name": "Sahiwal",
-    "localName": "साहीवाल",
-    "description": "A popular dairy breed from Punjab, known for its docility and high-quality milk with a high butterfat content. It is reddish-dun in color.",
-    "imageUrl": "https://i.imgur.com/exampleSahiwal.jpg",
-    "managementTips": "Highly resistant to ticks and many tropical diseases. Provide ample shade and fresh water, especially in hot climates."
+    "origin": "Punjab",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Sahiwal_cattle.jpg/640px-Sahiwal_cattle.jpg",
+    "stats": { "milk_yield": "2000-3000 kg", "weight": "450kg", "protein": "4.8%", "height": "125 cm", "coat": "Reddish Dun", "diseases": "Mastitis Occasional" },
+    "description": "One of the best dairy breeds of Zebu cattle. Known for heat tolerance and high milk production."
   },
   {
-    "id": "murrah",
-    "name": "Murrah",
-    "localName": "मुर्रा",
-    "description": "A world-renowned buffalo breed from Haryana, famous for its high-fat milk, often called the 'black gold' of India. It has tightly curved horns.",
-    "imageUrl": "https://i.imgur.com/exampleMurrah.jpg",
-    "managementTips": "Requires access to clean water for wallowing to regulate body temperature. A high-protein diet is essential for optimal milk production."
+    "id": "3",
+    "name": "Red Sindhi",
+    "origin": "Sindh",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Red_Sindhi_cattle.jpg/640px-Red_Sindhi_cattle.jpg",
+    "stats": { "milk_yield": "1800 kg", "weight": "350kg", "protein": "4.6%", "height": "120 cm", "coat": "Deep Red", "diseases": "Hardy" },
+    "description": "Compact and hardy, known for deep red color and ability to survive in dry climates."
+  },
+  {
+    "id": "4",
+    "name": "Tharparkar",
+    "origin": "Rajasthan",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Tharparkar_cattle.jpg/640px-Tharparkar_cattle.jpg",
+    "stats": { "milk_yield": "1500 kg", "weight": "400kg", "protein": "4.2%", "height": "128 cm", "coat": "White", "diseases": "Very Resistant" },
+    "description": "Known as the 'White Sindhi', highly disease resistant and excellent for both milk and labor."
+  },
+  {
+    "id": "5",
+    "name": "Kankrej",
+    "origin": "Gujarat, India",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Kankrej_bull.jpg/640px-Kankrej_bull.jpg",
+    "stats": { "milk_yield": "1400 kg", "weight": "550kg", "protein": "4.3%", "height": "150 cm", "coat": "Silver / Iron Grey", "diseases": "Tick Resistant" },
+    "description": "One of the heaviest Indian breeds. Known for huge, lyre-shaped horns and a majestic gait."
+  },
+  {
+    "id": "6",
+    "name": "Ongole",
+    "origin": "Andhra Pradesh",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Ongole_bull.jpg/640px-Ongole_bull.jpg",
+    "stats": { "milk_yield": "1000 kg", "weight": "600kg", "protein": "4.1%", "height": "155 cm", "coat": "Glossy White", "diseases": "Foot & Mouth Resistant" },
+    "description": "A powerful draft breed known for muscular bodies and great strength. Exported globally (Brahman breed ancestor)."
+  },
+  {
+    "id": "7",
+    "name": "Rathi",
+    "origin": "Rajasthan",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rathi_cattle.jpg/640px-Rathi_cattle.jpg",
+    "stats": { "milk_yield": "1560 kg", "weight": "380kg", "protein": "4.4%", "height": "125 cm", "coat": "Brown & White", "diseases": "Heat Tolerant" },
+    "description": "An important dual-purpose breed of the arid regions. A mixture of Sahiwal, Red Sindhi and Tharparkar blood."
+  },
+  {
+    "id": "8",
+    "name": "Hariana",
+    "origin": "Haryana",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Hariana_Cattle.jpg/640px-Hariana_Cattle.jpg",
+    "stats": { "milk_yield": "900-1200 kg", "weight": "400kg", "protein": "4.2%", "height": "140 cm", "coat": "White / Light Grey", "diseases": "General Hardy" },
+    "description": "The premier dual-purpose breed of North India. Excellent for agricultural work and reasonable milk."
+  },
+  {
+    "id": "9",
+    "name": "Deoni",
+    "origin": "Maharashtra",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Deoni_bull.jpg/640px-Deoni_bull.jpg",
+    "stats": { "milk_yield": "1100 kg", "weight": "520kg", "protein": "4.3%", "height": "145 cm", "coat": "Black & White Spotted", "diseases": "Hardy" },
+    "description": "Resembles the Gir breed but has distinct black and white spotting. Popular in the Marathwada region."
+  },
+  {
+    "id": "10",
+    "name": "Hallikar",
+    "origin": "Karnataka",
+    "image": "https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Hallikar_cattle.jpg/640px-Hallikar_cattle.jpg",
+    "stats": { "milk_yield": "Low", "weight": "450kg", "protein": "N/A", "height": "140 cm", "coat": "Dark Grey", "diseases": "Very Hardy" },
+    "description": "Known for its backward-curving horns and incredible endurance. It is primarily a draft breed."
   }
 ]

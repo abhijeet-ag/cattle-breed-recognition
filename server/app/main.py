@@ -1,14 +1,16 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
+import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
+
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import logging
-from .ml_handler import load_model, predict
-from .models import InferenceResponse
-from .routes import bpa_router, breeds_router
+import uvicorn
+import numpy as np
+from PIL import Image
+import io
+import tensorflow as tf
+import tf_keras
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-app = FastAPI(title="Cattle Breed Recognition API")
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,26 +20,54 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.on_event("startup")
-async def startup_event():
-    load_model()
+# Load Model
+try:
+    print("⏳ Loading Server Model...")
+    model = tf.keras.models.load_model("model/model.h5")
+    print("✅ Server Model Loaded!")
+except Exception as e:
+    print(f"⚠️ Warning: Could not load model.h5. Error: {e}")
+    model = None
+
+# --- CORRECTED LABELS ---
+CLASSES = [
+    "Gir", 
+    "Ayrshire", 
+    "Brown Swiss", 
+    "Holstein Friesian", 
+    "Sahiwal", 
+    "Tharparkar"
+]
 
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to the Cattle Breed Recognition API"}
+def home():
+    return {"message": "Cattle Recognizer API is running"}
 
-@app.post("/infer", response_model=InferenceResponse)
-async def infer_breed(file: UploadFile = File(...)):
-    if not file.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="File provided is not an image.")
-    
+@app.post("/predict")
+async def predict(file: UploadFile = File(...)):
+    if model is None:
+        return {"class": "Server Error", "confidence": 0.0}
+
     try:
-        image_bytes = await file.read()
-        predictions = predict(image_bytes)
-        return InferenceResponse(predictions=predictions)
-    except Exception as e:
-        logger.error(f"Inference error: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to process the image: {str(e)}")
+        contents = await file.read()
+        image = Image.open(io.BytesIO(contents)).convert("RGB")
+        image = image.resize((224, 224))
+        img_array = np.array(image) / 255.0
+        img_array = np.expand_dims(img_array, axis=0)
 
-app.include_router(bpa_router, prefix="/bpa", tags=["BPA Mock"])
-app.include_router(breeds_router, prefix="/breeds", tags=["Breeds"])
+        predictions = model.predict(img_array)
+        confidence = float(np.max(predictions))
+        class_idx = np.argmax(predictions)
+        
+        predicted_class = CLASSES[class_idx] if class_idx < len(CLASSES) else "Unknown"
+
+        return {
+            "class": predicted_class,
+            "confidence": confidence
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

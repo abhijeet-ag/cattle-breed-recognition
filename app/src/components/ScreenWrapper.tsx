@@ -1,28 +1,37 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { View, StyleSheet, StatusBar as RNStatusBar } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ScreenWrapperProps {
   children: React.ReactNode;
+  style?: any;
 }
 
-export default function ScreenWrapper({ children }: ScreenWrapperProps) {
+const ScreenWrapper: React.FC<ScreenWrapperProps> = ({ children, style }) => {
+  const insets = useSafeAreaInsets();
+  const { theme, isDarkMode } = useLanguage(); // Get the active theme
+  
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
-      <View style={styles.content}>
+    <View style={[styles.container, { paddingTop: insets.top, backgroundColor: theme.background }]}>
+      <RNStatusBar 
+        barStyle={isDarkMode ? "light-content" : "dark-content"} 
+        backgroundColor={theme.background} 
+      />
+      <View style={[styles.content, style]}>
         {children}
       </View>
-    </SafeAreaView>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   content: {
     flex: 1,
   },
 });
+
+export default ScreenWrapper;

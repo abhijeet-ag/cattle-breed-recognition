@@ -1,29 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { I18nextProvider } from 'react-i18next';
-import i18n from './src/i18n';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation/AppNavigator';
-import { loadModel } from './src/ml/inference';
+import { LanguageProvider } from './src/context/LanguageContext';
 
 export default function App() {
-  useEffect(() => {
-    // Load TensorFlow.js model on app start
-    const initializeModel = async () => {
-      try {
-        await loadModel();
-        console.log('✅ TensorFlow.js model loaded successfully');
-      } catch (error) {
-        console.error('❌ Failed to load model:', error);
-      }
-    };
-    
-    initializeModel();
-  }, []);
-
   return (
-    <I18nextProvider i18n={i18n}>
-      <StatusBar style="auto" />
-      <AppNavigator />
-    </I18nextProvider>
+    <SafeAreaProvider>
+      <LanguageProvider>
+        <StatusBar style="light" />
+        <AppNavigator />
+      </LanguageProvider>
+    </SafeAreaProvider>
   );
 }

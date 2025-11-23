@@ -1,0 +1,82 @@
+export const breedsData = [
+  {
+    id: "1",
+    name: "Gir",
+    origin: "Gujarat, India",
+    image: require("../../assets/images/breeds/gir.jpg"),
+    stats: { milk_yield: "1200-1800 kg", weight: "400kg", protein: "4.5%", height: "130 cm", coat: "Red / Speckled", diseases: "Tick Resistant" },
+    description: "Famous for its rounded forehead and long pendulous ears. It is one of the most popular dairy breeds in India."
+  },
+  {
+    id: "2",
+    name: "Sahiwal",
+    origin: "Punjab",
+    image: require("../../assets/images/breeds/sahiwal.jpg"),
+    stats: { milk_yield: "2000-3000 kg", weight: "450kg", protein: "4.8%", height: "125 cm", coat: "Reddish Dun", diseases: "Mastitis Occasional" },
+    description: "One of the best dairy breeds of Zebu cattle. Known for heat tolerance and high milk production."
+  },
+  {
+    id: "3",
+    name: "Red Sindhi",
+    origin: "Sindh",
+    image: require("../../assets/images/breeds/red_sindhi.jpg"),
+    stats: { milk_yield: "1800 kg", weight: "350kg", protein: "4.6%", height: "120 cm", coat: "Deep Red", diseases: "Hardy" },
+    description: "Compact and hardy, known for deep red color and ability to survive in dry climates."
+  },
+  {
+    id: "4",
+    name: "Tharparkar",
+    origin: "Rajasthan",
+    image: require("../../assets/images/breeds/tharparkar.jpg"),
+    stats: { milk_yield: "1500 kg", weight: "400kg", protein: "4.2%", height: "128 cm", coat: "White", diseases: "Very Resistant" },
+    description: "Known as the 'White Sindhi', highly disease resistant and excellent for both milk and labor."
+  },
+  {
+    id: "5",
+    name: "Kankrej",
+    origin: "Gujarat, India",
+    image: require("../../assets/images/breeds/kankrej.jpg"),
+    stats: { milk_yield: "1400 kg", weight: "550kg", protein: "4.3%", height: "150 cm", coat: "Silver / Iron Grey", diseases: "Tick Resistant" },
+    description: "One of the heaviest Indian breeds. Known for huge, lyre-shaped horns and a majestic gait."
+  },
+  {
+    id: "6",
+    name: "Ongole",
+    origin: "Andhra Pradesh",
+    image: require("../../assets/images/breeds/ongole.jpg"),
+    stats: { milk_yield: "1000 kg", weight: "600kg", protein: "4.1%", height: "155 cm", coat: "Glossy White", diseases: "Foot & Mouth Resistant" },
+    description: "A powerful draft breed known for muscular bodies and great strength. Exported globally (Brahman breed ancestor)."
+  },
+  {
+    id: "7",
+    name: "Rathi",
+    origin: "Rajasthan",
+    image: require("../../assets/images/breeds/rathi.jpg"),
+    stats: { milk_yield: "1560 kg", weight: "380kg", protein: "4.4%", height: "125 cm", coat: "Brown & White", diseases: "Heat Tolerant" },
+    description: "An important dual-purpose breed of the arid regions. A mixture of Sahiwal, Red Sindhi and Tharparkar blood."
+  },
+  {
+    id: "8",
+    name: "Hariana",
+    origin: "Haryana",
+    image: require("../../assets/images/breeds/hariana.jpg"),
+    stats: { milk_yield: "900-1200 kg", weight: "400kg", protein: "4.2%", height: "140 cm", coat: "White / Light Grey", diseases: "General Hardy" },
+    description: "The premier dual-purpose breed of North India. Excellent for agricultural work and reasonable milk."
+  },
+  {
+    id: "9",
+    name: "Deoni",
+    origin: "Maharashtra",
+    image: require("../../assets/images/breeds/deoni.jpg"),
+    stats: { milk_yield: "1100 kg", weight: "520kg", protein: "4.3%", height: "145 cm", coat: "Black & White Spotted", diseases: "Hardy" },
+    description: "Resembles the Gir breed but has distinct black and white spotting. Popular in the Marathwada region."
+  },
+  {
+    id: "10",
+    name: "Hallikar",
+    origin: "Karnataka",
+    image: require("../../assets/images/breeds/hallikar.jpg"),
+    stats: { milk_yield: "Low", weight: "450kg", protein: "N/A", height: "140 cm", coat: "Dark Grey", diseases: "Very Hardy" },
+    description: "Known for its backward-curving horns and incredible endurance. It is primarily a draft breed."
+  }
+];

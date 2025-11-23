@@ -1,68 +1,114 @@
-import React, { useRef } from 'react';
-import { View, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Colors } from '../constants/Colors';
+import { useLanguage } from '../context/LanguageContext';
+import { useIsFocused } from '@react-navigation/native';
 
-import ScreenWrapper from '../components/ScreenWrapper';
-import { AppStackParamList } from '../types';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { useTranslation } from 'react-i18next';
-
-type CameraScreenNavigationProp = StackNavigationProp<AppStackParamList, 'Camera'>;
-
-export default function CameraScreen() {
-  const navigation = useNavigation<CameraScreenNavigationProp>();
+export default function CameraScreen({ navigation }: any) {
   const [permission, requestPermission] = useCameraPermissions();
+  const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<CameraView>(null);
-  const { t } = useTranslation();
+  const isFocused = useIsFocused();
+  const { theme, language } = useLanguage();
 
-  React.useEffect(() => {
-    // Request permissions when the screen loads
-    if (!permission?.granted) {
+  // Labels based on language
+  const text = language === 'en' ? {
+    permRequired: "We need your permission to show the camera",
+    grant: "Grant Permission",
+    snap: "Snap",
+    flip: "Flip",
+    processing: "Processing..."
+  } : {
+    permRequired: "कैमरा दिखाने के लिए हमें आपकी अनुमति की आवश्यकता है",
+    grant: "अनुमति दें",
+    snap: "फोटो लें",
+    flip: "पलटें",
+    processing: "प्रोसेसिंग..."
+  };
+
+  useEffect(() => {
+    if (!permission) {
       requestPermission();
     }
-  }, [permission, requestPermission]);
-
-  const takePicture = async () => {
-    if (cameraRef.current) {
-      const photo = await cameraRef.current.takePictureAsync({
-        quality: 1,
-        exif: false,
-      });
-      if (photo) {
-        navigation.replace('Result', { imageUri: photo.uri });
-      }
-    }
-  };
+  }, [permission]);
 
   if (!permission) {
     // Camera permissions are still loading
-    return <View />;
+    return <View style={[styles.container, {backgroundColor: theme.background}]} />;
   }
 
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <ScreenWrapper>
-        <View style={styles.permissionContainer}>
-          <Text style={styles.permissionText}>{t('permissions.camera.message')}</Text>
-          <TouchableOpacity onPress={requestPermission} style={styles.permissionButton}>
-            <Text style={styles.permissionButtonText}>{t('permissions.grant')}</Text>
-          </TouchableOpacity>
-        </View>
-      </ScreenWrapper>
+      <View style={[styles.container, {backgroundColor: theme.background, justifyContent: 'center', alignItems: 'center', padding: 20}]}>
+        <MaterialCommunityIcons name="camera-off" size={60} color={Colors.textSecondary} />
+        <Text style={[styles.message, {color: theme.text}]}>{text.permRequired}</Text>
+        <TouchableOpacity onPress={requestPermission} style={styles.permButton}>
+          <Text style={styles.permButtonText}>{text.grant}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      try {
+        const photo = await cameraRef.current.takePictureAsync({
+          quality: 0.8,
+          base64: false,
+          skipProcessing: true, // Faster capture
+        });
+        
+        if (photo) {
+          navigation.navigate('Result', { imageUri: photo.uri });
+        }
+      } catch (error) {
+        Alert.alert("Error", "Failed to take photo");
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing="back" ref={cameraRef}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
-            <View style={styles.innerButton} />
-          </TouchableOpacity>
-        </View>
-      </CameraView>
+      {isFocused && (
+        <CameraView 
+          style={styles.camera} 
+          facing="back"
+          ref={cameraRef}
+          onCameraReady={() => setIsCameraReady(true)}
+        >
+          <View style={styles.overlay}>
+            {/* Top Bar: Back Button */}
+            <View style={styles.topBar}>
+              <TouchableOpacity 
+                style={styles.iconButton} 
+                onPress={() => navigation.goBack()}
+              >
+                <MaterialCommunityIcons name="close" size={28} color="white" />
+              </TouchableOpacity>
+            </View>
+
+            {/* Bottom Bar: Controls */}
+            <View style={styles.bottomBar}>
+              <View style={styles.spacer} />
+              
+              {/* Shutter Button */}
+              <TouchableOpacity 
+                style={[styles.shutterButton, { opacity: isCameraReady ? 1 : 0.5 }]}
+                onPress={takePicture}
+                disabled={!isCameraReady}
+              >
+                <View style={styles.shutterInner} />
+              </TouchableOpacity>
+
+              {/* Spacer to center the shutter */}
+              <View style={styles.spacer} />
+            </View>
+          </View>
+        </CameraView>
+      )}
     </View>
   );
 }
@@ -70,53 +116,73 @@ export default function CameraScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'black',
+  },
+  message: {
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 16,
+  },
+  permButton: {
+    backgroundColor: Colors.primary,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  permButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   camera: {
     flex: 1,
   },
-  buttonContainer: {
+  overlay: {
     flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  },
+  topBar: {
     flexDirection: 'row',
-    backgroundColor: 'transparent',
-    margin: 64,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-start',
+    paddingTop: 50,
+    paddingLeft: 20,
   },
-  captureButton: {
-    borderWidth: 4,
-    borderColor: 'white',
-    width: 70,
-    height: 70,
-    borderRadius: 35,
+  bottomBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingBottom: 50,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    paddingTop: 30,
+  },
+  iconButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(0,0,0,0.3)',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  innerButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+  shutterButton: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     backgroundColor: 'white',
-  },
-  permissionContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    elevation: 5,
   },
-  permissionText: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 20,
+  shutterInner: {
+    width: 68,
+    height: 68,
+    borderRadius: 34,
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: 'black',
   },
-  permissionButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 8,
-  },
-  permissionButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+  spacer: {
+    flex: 1,
+  }
 });

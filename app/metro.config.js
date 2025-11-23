@@ -1,10 +1,11 @@
 const { getDefaultConfig } = require('expo/metro-config');
 
-module.exports = (async () => {
-  const config = await getDefaultConfig(__dirname);
+const config = getDefaultConfig(__dirname);
 
-  // add .bin to asset extensions
-  config.resolver.assetExts.push('bin');
+// Add 'bin' to the list of supported assets for TensorFlow.js
+config.resolver.assetExts.push(
+  'bin', 
+  'json' 
+);
 
-  return config;
-})();
+module.exports = config;
